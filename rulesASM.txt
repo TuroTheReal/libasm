@@ -1,0 +1,176 @@
+rdi : premier argument
+rsi : deuxième argument
+rdx : troisième argument
+rcx : quatrième argument
+
+rax : valeur de retour principale
+rdx : deuxième valeur de retour (pour les types 128-bit)
+
+rbx, rbp, r12-r15 doivent être sauvegardés si utilisés
+
+Structure de base d'une fonction ASM:
+
+section .text
+global ma_fonction
+
+ma_fonction:
+    ; ===========================================
+    ; PROLOGUE - "Entrée de fonction"
+    ; ===========================================
+    ; Équivalent à l'ouverture { en C
+    push rbp            ; Sauvegarder l'ancien frame pointer
+    mov rbp, rsp        ; Établir nouveau frame pointer
+    ; push rbx          ; Sauvegarder registres si nécessaire
+    ; sub rsp, 16       ; Réserver espace pour variables locales si besoin
+
+
+    ; ===========================================
+    ; RÉCUPÉRATION DES ARGUMENTS
+    ; ===========================================
+    ; Les arguments arrivent automatiquement dans :
+    ; rdi = 1er argument (comme arg1 en C)
+    ; rsi = 2ème argument (comme arg2 en C)
+    ; rdx = 3ème argument
+    ; rcx = 4ème argument
+    ; Pas besoin de les "déclarer", ils sont déjà là !
+
+
+    ; ===========================================
+    ; VALIDATION DES ARGUMENTS (optionnel)
+    ; ===========================================
+    ; Équivalent à vérifier if (arg1 == NULL) en C
+    test rdi, rdi       ; Vérifier si 1er argument est NULL
+    jz .error_case      ; Si oui, aller au cas d'erreur
+
+
+    ; ===========================================
+    ; DÉCLARATION VARIABLES LOCALES
+    ; ===========================================
+    ; En C : int compteur = 0;
+    ; En ASM : utiliser registres ou stack
+    xor rax, rax        ; rax sera notre "compteur" (== compteur = 0)
+    xor rcx, rcx        ; rcx sera notre "index" (== index = 0)
+    ; mov qword [rbp-8], 0  ; Variable sur la stack si nécessaire
+
+
+    ; ===========================================
+    ; CORPS PRINCIPAL DE LA FONCTION
+    ; ===========================================
+    ; Équivalent au code entre { } en C
+.main_loop:             ; Label pour les boucles (comme while/for en C)
+    ; Ici tu mets la logique principale
+    ; Exemple : traitement caractère par caractère
+
+    ; Condition de boucle (équivalent à while condition)
+    cmp byte [rdi + rcx], 0  ; Comparer avec condition d'arrêt
+    je .end_loop             ; Si condition vraie, sortir (comme break)
+
+    ; Corps de la boucle
+    inc rax             ; Incrémenter compteur (comme compteur++)
+    inc rcx             ; Incrémenter index (comme index++)
+    jmp .main_loop      ; Retourner au début (comme continue)
+
+.end_loop:
+    ; Code après la boucle
+    ; Le résultat est déjà dans rax pour le retour
+    jmp .cleanup        ; Aller au nettoyage
+
+
+    ; ===========================================
+    ; GESTION DES CAS D'ERREUR
+    ; ===========================================
+.error_case:
+    ; Équivalent à return NULL; ou return -1; en C
+    mov rax, -1         ; ou xor rax, rax pour NULL
+    jmp .cleanup        ; Aller au nettoyage
+
+
+    ; ===========================================
+    ; NETTOYAGE ET RETOUR
+    ; ===========================================
+.cleanup:
+    ; Équivalent à la fermeture } en C
+    ; Restaurer les registres sauvegardés
+    ; add rsp, 16       ; Libérer l'espace des variables locales
+    ; pop rbx           ; Restaurer registres sauvegardés
+
+
+    ; ===========================================
+    ; ÉPILOGUE - "Sortie de fonction"
+    ; ===========================================
+    mov rsp, rbp        ; Restaurer stack pointer
+    pop rbp             ; Restaurer ancien frame pointer
+    ret                 ; Retourner (rax contient la valeur de retour)
+
+
+
+===========================================
+	INSTRUCTIONS & FONCTIONS DE BASE
+===========================================
+
+Instructions de mouvement et copie:
+
+Instruc	Description							Exemple				Explication
+
+mov		Copie valeur de point a a b			mov rax, rbx		Copie le contenu de rbx dans rax
+lea		Charge l'adresse effective			lea rax, [rbx + 8]	Met l'adresse (rbx + 8) dans rax, sans lire la mémoire
+push	Empile une valeur sur la pile		push rax			Met rax sur le sommet de la pile
+pop		Dépile une valeur de la pile		pop rbx				Prend la valeur du sommet de pile et la met dans rbx
+
+
+Instructions arithmétiques et logiques:
+
+Instruc	Description			Exemple			Explication
+
+add		Addition			add rax, 5		rax = rax + 5
+sub		Soustraction		sub rax, rbx	rax = rax - rbx
+inc		Incrément de 1		inc rax			rax = rax + 1 (plus rapide que add rax, 1)
+dec		Décrément de 1		dec rax			rax = rax - 1
+xor		OU exclusif			xor rax, rax	Remet rax à zéro (technique classique)
+and		ET logique			and rax, rbx	rax = rax & rbx
+or		OU logique			or rax, rbx		rax = rax
+neg		Négation			neg rax			rax = -rax
+
+
+Instructions de comparaison:
+
+Instruc	Description						Exemple			Explication
+cmp		Compare 2 valeurs				cmp rax, 0		Compare rax avec 0, met les flags à jour
+test	Test logique (AND sans stocker)	test rdi, rdi	Vérifie si rdi est zéro (technique pour vérifier NULL)
+
+
+Instructions de saut (contrôle de flux):
+
+Instruc		Description					Condition			Explication
+jmp			Saut inconditionnel			Toujours			Saute toujours au label spécifié
+je / jz		Saut si égal / si zéro		ZF = 1				Saute si la dernière comparaison était égale
+jne / jnz	Saut si pas égal / pas zéro	ZF = 0				Saute si la dernière comparaison était différente
+jl			Saut si inférieur (signé)	SF ≠ OF				Saute si premier opérande < deuxième
+jg			Saut si supérieur (signé)	ZF = 0 ET SF = OF	Saute si premier opérande > deuxième
+jle			Saut si inférieur ou égal	ZF = 1 OU SF ≠ OF	Saute si premier opérande ≤ deuxième
+jge			Saut si supérieur ou égal	SF = OF				Saute si premier opérande ≥ deuxième
+
+
+Instructions système et spéciales:
+
+Instruc	Description			Exemple		Explication
+ret		Retour de fonction	ret			Retourne à l'appelant, utilise la valeur dans rax
+call	Appel de fonction	call malloc	Appelle la fonction malloc
+syscall	Appel système		syscall		Invoque un service du kernel (read, write, etc.)
+
+
+Spécificateurs de taille mémoire:
+
+Spécificateur	Taille		Exemple				Explication
+byte			1 octet		mov byte [rax], 0	Manipule un seul octet
+word			2 octets	mov word [rax], 0	Manipule 2 octets
+dword			4 octets	mov dword [rax], 0	Manipule 4 octets
+qword			8 octets	mov qword [rax], 0	Manipule 8 octets (taille standard x64)
+
+
+
+Taille		Registres (exemples)								Utilisations
+64-bit		rax, rbx, rcx, rdx, rsi, rdi, rbp, rsp, r8 à r15	Pour manipuler des octets (par ex. un caractère).
+32-bit		eax, ebx, ecx, edx, esi, edi, ebp, esp, r8d à r15d	Pour manipuler des entiers courts.
+16-bit		ax, bx, cx, dx, si, di, bp, sp, r8w à r15w			MOST USE instructions sont opti pour 32 bits, taille standard pour les int en C.
+8-bit		al, bl, cl, dl, sil, dil, bpl, spl, r8b à r15b		Pour manipuler de gros nombres, adresses mémoire, pointeurs.

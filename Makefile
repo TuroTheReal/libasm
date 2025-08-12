@@ -1,40 +1,131 @@
-NAME = libasm.a
+#******************************************************************************
+#                                    MAIN                                     *
+#******************************************************************************
+NAME        = libasm.a
+HEADER      = libasm.h
+EXEC_NAME	= LEXECCCCCC
+
+#******************************************************************************
+#                                INSTRUCTIONS                                 *
+#******************************************************************************
 CC = gcc
 NASM = nasm
 NASM_FLAGS = -f elf64
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -fPIE -Wall -Wextra -Werror
+AR = ar rcs
+RM = rm -rf
+
+#******************************************************************************
+#                       SOURCES, OBJECTS & DEPENDENCIES                       *
+#******************************************************************************
+OBJ_DIR     = obj/
+DEP_DIR     = $(OBJ_DIR)
 
 SRCS = ft_strlen.s ft_strcpy.s ft_strcmp.s ft_write.s ft_read.s ft_strdup.s
-OBJS = $(SRCS:.s=.o)
+OBJS = $(addprefix $(OBJ_DIR), $(SRCS:.s=.o))
 
 BONUS_SRCS = ft_atoi_base_bonus.s ft_list_push_front_bonus.s ft_list_size_bonus.s \
              ft_list_sort_bonus.s ft_list_remove_if_bonus.s
-BONUS_OBJS = $(BONUS_SRCS:.s=.o)
+BONUS_OBJS = $(addprefix $(OBJ_DIR), $(BONUS_SRCS:.s=.o))
 
+MAIN_SRC = main.c
+MAIN_OBJ = $(addprefix $(OBJ_DIR), $(MAIN_SRC:.c=.o))
+
+DEPS = $(OBJS:.o=.d) $(BONUS_OBJS:.o=.d) $(MAIN_OBJ:.o=.d)
+
+#******************************************************************************
+#                                  COLORS                                     *
+#******************************************************************************
+RESET = \033[0m
+
+COLOR_10 = \033[38;5;33m
+COLOR_11 = \033[38;5;69m
+COLOR_12 = \033[38;5;105m
+COLOR_13 = \033[38;5;141m
+COLOR_14 = \033[38;5;177m
+COLOR_15 = \033[38;5;213m
+
+ROSE = \033[1;38;5;225m
+VIOLET = \033[1;38;5;55m
+VERT = \033[1;38;5;85m
+BLEU = \033[1;34m
+
+#******************************************************************************
+#                                COMPILATION                                  *
+#******************************************************************************
+
+all: $(NAME) test
 
 $(NAME): $(OBJS)
-	ar rcs $(NAME) $(OBJS)
+	@$(AR) $(NAME) $(OBJS)
+	@echo "$(ROSE)Library $(NAME) created$(RESET)"
 
+test: $(NAME) $(MAIN_OBJ)
+	@$(CC) $(CFLAGS) $(MAIN_OBJ) $(NAME) -o $(EXEC_NAME)
+	@echo "$(ROSE)Executable "$(EXEC_NAME)" created$(RESET)"
 
-all: $(NAME)
+$(OBJ_DIR)%.o: %.s | $(OBJ_DIR)
+	@mkdir -p $(dir $@)
+	@$(NASM) $(NASM_FLAGS) $< -o $@
+	@echo "$(BLEU)Assembling $< -> $@$(RESET)"
 
+$(OBJ_DIR)%.o: %.c $(HEADER) | $(OBJ_DIR)
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
+	@echo "$(BLEU)Compiling $< -> $@$(RESET)"
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
+
+bonus: $(OBJS) $(BONUS_OBJS)
+	@$(AR) $(NAME) $(OBJS) $(BONUS_OBJS)
+	@echo "$(ROSE)Library $(NAME) (bonus) created$(RESET)"
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS)
-
+	@$(RM) $(OBJ_DIR)
+	@echo "$(VIOLET)Object files and dependencies removed$(RESET)"
 
 fclean: clean
-	rm -f $(NAME) test_libasm
-
+	@$(RM) $(NAME) $(EXEC_NAME)
+	@echo "$(VERT)$(NAME) & $(EXEC_NAME) removed$(RESET)"
 
 re: fclean all
 
-
-bonus: $(OBJS) $(BONUS_OBJS)
-	ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
-
-%.o: %.s
-	$(NASM) $(NASM_FLAGS) $< -o $@
-
+-include $(DEPS)
 
 .PHONY: all clean fclean re bonus test
+
+
+
+
+
+# all: $(NAME)
+# 	@$(CC) $(CFLAGS) main.c $(NAME) -o test
+# 	@echo "$(ROSE)COMPILATION FINISHED, FILES $(NAME) CREATED"
+
+
+# $(NAME): $(OBJS)
+# 	@ar rcs $(NAME) $(OBJS)
+
+
+# clean:
+# 	@rm -f $(OBJS) $(BONUS_OBJS)
+# 	@echo "$(VIOLET)Suppressing objects & dependencies files of $(NAME)$(RESET)"
+
+# fclean: clean
+# 	@rm -f $(NAME)
+# 	@echo "$(VERT)Suppressing archives $(NAME)$(RESET)"
+
+
+# re: fclean all
+
+
+# bonus: $(OBJS) $(BONUS_OBJS)
+# 	ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
+
+
+# %.o: %.s
+# 	$(NASM) $(NASM_FLAGS) $< -o $@
+
+
+# .PHONY: all clean fclean re bonus test
