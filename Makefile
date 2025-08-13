@@ -31,7 +31,12 @@ BONUS_OBJS = $(addprefix $(OBJ_DIR), $(BONUS_SRCS:.s=.o))
 MAIN_SRC = main.c
 MAIN_OBJ = $(addprefix $(OBJ_DIR), $(MAIN_SRC:.c=.o))
 
+BONUS_MAIN_SRC = main_bonus.c
+BONUS_MAIN_OBJ = $(addprefix $(OBJ_DIR), $(BONUS_MAIN_SRC:.c=.o))
+
 DEPS = $(OBJS:.o=.d) $(BONUS_OBJS:.o=.d) $(MAIN_OBJ:.o=.d)
+
+ALL_OBJS = $(OBJS) $(BONUS_OBJS)
 
 #******************************************************************************
 #                                  COLORS                                     *
@@ -54,7 +59,13 @@ BLEU = \033[1;34m
 #                                COMPILATION                                  *
 #******************************************************************************
 
+
 all: $(NAME) test
+
+bonus: $(ALL_OBJS)
+	@$(AR) $(NAME) $(ALL_OBJS)
+	@echo "$(ROSE)Library $(NAME) with bonus created$(RESET)"
+	@$(MAKE) -s testbonus
 
 $(NAME): $(OBJS)
 	@$(AR) $(NAME) $(OBJS)
@@ -62,6 +73,10 @@ $(NAME): $(OBJS)
 
 test: $(NAME) $(MAIN_OBJ)
 	@$(CC) $(CFLAGS) $(MAIN_OBJ) $(NAME) -o $(EXEC_NAME)
+	@echo "$(ROSE)Executable "$(EXEC_NAME)" created$(RESET)"
+
+testbonus: $(NAME) $(BONUS_MAIN_OBJ)
+	@$(CC) $(CFLAGS) $(BONUS_MAIN_OBJ) $(NAME) -o $(EXEC_NAME)
 	@echo "$(ROSE)Executable "$(EXEC_NAME)" created$(RESET)"
 
 $(OBJ_DIR)%.o: %.s | $(OBJ_DIR)
@@ -77,10 +92,6 @@ $(OBJ_DIR)%.o: %.c $(HEADER) | $(OBJ_DIR)
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
-bonus: $(OBJS) $(BONUS_OBJS)
-	@$(AR) $(NAME) $(OBJS) $(BONUS_OBJS)
-	@echo "$(ROSE)Library $(NAME) (bonus) created$(RESET)"
-
 clean:
 	@$(RM) $(OBJ_DIR)
 	@echo "$(VIOLET)Object files and dependencies removed$(RESET)"
@@ -94,38 +105,3 @@ re: fclean all
 -include $(DEPS)
 
 .PHONY: all clean fclean re bonus test
-
-
-
-
-
-# all: $(NAME)
-# 	@$(CC) $(CFLAGS) main.c $(NAME) -o test
-# 	@echo "$(ROSE)COMPILATION FINISHED, FILES $(NAME) CREATED"
-
-
-# $(NAME): $(OBJS)
-# 	@ar rcs $(NAME) $(OBJS)
-
-
-# clean:
-# 	@rm -f $(OBJS) $(BONUS_OBJS)
-# 	@echo "$(VIOLET)Suppressing objects & dependencies files of $(NAME)$(RESET)"
-
-# fclean: clean
-# 	@rm -f $(NAME)
-# 	@echo "$(VERT)Suppressing archives $(NAME)$(RESET)"
-
-
-# re: fclean all
-
-
-# bonus: $(OBJS) $(BONUS_OBJS)
-# 	ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
-
-
-# %.o: %.s
-# 	$(NASM) $(NASM_FLAGS) $< -o $@
-
-
-# .PHONY: all clean fclean re bonus test

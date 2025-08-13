@@ -1,29 +1,29 @@
 section .text
-    global ft_strdup
+global ft_strdup
+extern ft_strlen
+extern ft_strcpy
+extern malloc
 
 ft_strdup:
-	test rsi, rsi 			; if src == null
-	jz .error 				; si oui jump a .error
+   						; Argument: rdi = src string
+   						; r8 = registre libre
 
-	test rdi, rdi 			; if dst == null
-	jz .error 				; si oui jump a .error
+	mov r8, rdi			; save src dans r8
 
-	xor rcx, rcx 			; int i = 0
+	call ft_strlen		; rax = longueur
+	inc rax				; +1 pour '\0'
 
-.loop:
-	mov al, [rsi + rcx]		; al = src[i]
-	mov [rdi + rcx], al		; dest[i] = al
+	mov rdi, rax		; taille pour malloc
+    call malloc wrt ..plt ; Utiliser la PLT explicitement
+	test rax, rax		; vérifier si malloc OK
+	je .error			; si NULL -> erreur
 
-	cmp al, 0				; si al == '\0' fin de copie
-	je .end					; if == '\0', break
-
-	inc rcx					; i++
-	jmp .loop				; retourne debut de la boucle
-
-.end:
-	mov rax, rdi
-	ret						; return i, dans ce cas rax
+						; Copier la chaîne
+	mov rdi, rax		; destination = résultat malloc
+	mov rsi, r8			; source = string originale
+	call ft_strcpy		; copier
+	ret					; rax = return ft_strcpy
 
 .error:
-	xor rax, rax			; return 0
+	xor rax, rax		  ; retourner NULL
 	ret

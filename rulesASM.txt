@@ -1,12 +1,14 @@
+caller-saved
 rdi : premier argument
 rsi : deuxième argument
 rdx : troisième argument
 rcx : quatrième argument
 
 rax : valeur de retour principale
-rdx : deuxième valeur de retour (pour les types 128-bit)
+rdx : deuxième valeur de retour
 
-rbx, rbp, r12-r15 doivent être sauvegardés si utilisés
+callee-saved
+rbx, rbp, r12-r15 doivent push/pop si utilisés
 
 Structure de base d'une fonction ASM:
 
