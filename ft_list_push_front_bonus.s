@@ -11,18 +11,18 @@ ft_list_push_front:
     push r13
 
     test rdi, rdi
-    jz .end         ; si lst == NULL, rien à faire
+    jz .end         	; si lst == NULL, rien à faire
 
-    mov r12, rdi    ; r12 = lst (&ptr)
-    mov r13, rsi    ; r13 = data
+    mov r12, rdi    	; r12 = lst (&ptr)
+    mov r13, rsi    	; r13 = data
 
-   					; 16 bytes = 8 -> data + 8 -> next
+   						; 16 bytes = 8 -> data + 8 -> next
     mov rdi, 16
     call malloc wrt ..plt
     test rax, rax
-    jz .end         ; si malloc échec, rien à faire
+    jz .end        		; si malloc échec, rien à faire
 
-    mov rbx, rax    ; rbx = nouveau noeud
+    mov rbx, rax    	; rbx = nouveau noeud
 
     					; Init node
     mov [rbx], r13      ; nouveau->data = data
