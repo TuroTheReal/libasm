@@ -192,42 +192,42 @@ ft_atoi_base:
 	jmp .sign_loop
 
 .invalid_signs:
-    add rsp, 8          ; Retirer l'adresse de retour de .parse_signs
-    jmp .error          ; Maintenant on peut sauter en sécurité
+	add rsp, 8			; Retirer l'adresse de retour de .parse_signs
+	jmp .error			; Maintenant on peut sauter en sécurité
 
 .sign_done:
 	ret
 
 
-					; find pos for carac
-					; al = caractère, r13 = base, r14 = longueur
-					; rax = index ou -1 if not find
+						; find pos for carac
+						; al = caractère, r13 = base, r14 = longueur
+						; rax = index ou -1 if not find
 .find_char_in_base:
-	xor rcx, rcx	; index = 0
+	xor rcx, rcx		; index = 0
 
 .find_loop:
 	cmp rcx, r14
 	jge .char_not_found
 
-	cmp al, [r13 + rcx]  ; find ?
+	cmp al, [r13 + rcx]	; find ?
 	je .char_found
 
 	inc rcx
 	jmp .find_loop
 
 .char_found:
-	mov rax, rcx	; return index
+	mov rax, rcx		; return index
 	ret
 
 .char_not_found:
-	mov rax, -1	; not find
+	mov rax, -1			; not find
 	ret
 
-					; Convertit la séquence de chiffres en nombre
-					; r12 = position, r13 = base, r14 = len
-					; rax = nombre converti
+						; Convertit la séquence de chiffres en nombre
+						; r12 = position, r13 = base, r14 = len
+						; rax = nombre converti
 .convert_number:
-	xor rax, rax	; result = 0
+	xor rax, rax		; result = 0
 
 .convert_loop:
 	movzx ecx, byte [r12]	; current carac
@@ -251,5 +251,5 @@ ft_atoi_base:
 	jmp .convert_loop
 
 .convert_done:
-	mov rax, rbx	; return
+	mov rax, rbx			; return
 	ret
