@@ -179,34 +179,33 @@ and low-level debugging techniques that are applicable across many domains of so
 **Memory Safety**: Careful bounds checking and proper memory access patterns
 
 
-## 42 School Standards
+42 School Standards
+Project Requirements
 
-### Project Requirements
+✅ Assembly Implementation: All functions written in x86-64 Intel syntax assembly
+✅ C Library Compatibility: Perfect behavioral compatibility with standard libc functions
+✅ Error Handling: Proper errno setting and error condition management
+✅ System Calls: Direct kernel interface usage without libc dependencies
+✅ Build System: Comprehensive Makefile with standard targets
+✅ Documentation: Clear code comments and comprehensive testing
 
-✅ **Assembly Implementation**: All functions written in x86-64 Intel syntax assembly
-✅ **C Library Compatibility**: Perfect behavioral compatibility with standard libc functions
-✅ **Error Handling**: Proper errno setting and error condition management
-✅ **System Calls**: Direct kernel interface usage without libc dependencies
-✅ **Build System**: Comprehensive Makefile with standard targets
-✅ **Documentation**: Clear code comments and comprehensive testing
+Code Quality Standards
 
-### Code Quality Standards
+✅ Norm Compliance: Adherence to 42 School coding standards and best practices
+✅ Memory Safety: No buffer overflows, memory leaks, or undefined behavior
+✅ Edge Case Handling: Robust handling of null pointers, empty strings, and error conditions
+✅ Performance: Optimized assembly code with efficient register usage and instruction selection
+✅ Maintainability: Clean, well-commented assembly code with logical structure
+✅ Testing: Comprehensive test coverage with automated verification
 
-✅ **Norm Compliance**: Adherence to 42 School coding standards and best practices
-✅ **Memory Safety**: No buffer overflows, memory leaks, or undefined behavior
-✅ **Edge Case Handling**: Robust handling of null pointers, empty strings, and error conditions
-✅ **Performance**: Optimized assembly code with efficient register usage and instruction selection
-✅ **Maintainability**: Clean, well-commented assembly code with logical structure
-✅ **Testing**: Comprehensive test coverage with automated verification
+Learning Objectives Met
 
-### Learning Objectives Met
-
-✅ **Low-Level Understanding**: Deep comprehension of computer architecture and instruction execution
-✅ **System Programming**: Direct system call usage and kernel interface understanding
-✅ **Assembly Mastery**: Proficiency in x86-64 assembly language and Intel syntax
-✅ **ABI Knowledge**: Understanding of calling conventions and binary interface requirements
-✅ **Debugging Skills**: Ability to debug assembly code and analyze program behavior
-✅ **Performance Optimization**: Skills in writing efficient, optimized low-level code
+✅ Low-Level Understanding: Deep comprehension of computer architecture and instruction execution
+✅ System Programming: Direct system call usage and kernel interface understanding
+✅ Assembly Mastery: Proficiency in x86-64 assembly language and Intel syntax
+✅ ABI Knowledge: Understanding of calling conventions and binary interface requirements
+✅ Debugging Skills: Ability to debug assembly code and analyze program behavior
+✅ Performance Optimization: Skills in writing efficient, optimized low-level code
 
 
 ## Contact
