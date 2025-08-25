@@ -179,43 +179,43 @@ and low-level debugging techniques that are applicable across many domains of so
 **Memory Safety**: Careful bounds checking and proper memory access patterns
 
 
-42 School Standards
-Project Requirements
+## 42 School Standards
 
-✅ Assembly Implementation: All functions written in x86-64 Intel syntax assembly
-✅ C Library Compatibility: Perfect behavioral compatibility with standard libc functions
-✅ Error Handling: Proper errno setting and error condition management
-✅ System Calls: Direct kernel interface usage without libc dependencies
-✅ Build System: Comprehensive Makefile with standard targets
-✅ Documentation: Clear code comments and comprehensive testing
+### Project Standards
 
-Code Quality Standards
+- ✅ **Assembly Implementation**: All functions written in x86-64 Intel syntax assembly
+- ✅ **C Library Compatibility**: Perfect behavioral compatibility with standard libc functions
+- ✅ **Error Handling**: Proper errno setting and error condition management
+- ✅ **System Calls**: Direct kernel interface usage without libc dependencies
+- ✅ **Build System**: Comprehensive Makefile with standard targets
+- ✅ **Documentation**: Clear code comments and comprehensive testing
 
-✅ Norm Compliance: Adherence to 42 School coding standards and best practices
-✅ Memory Safety: No buffer overflows, memory leaks, or undefined behavior
-✅ Edge Case Handling: Robust handling of null pointers, empty strings, and error conditions
-✅ Performance: Optimized assembly code with efficient register usage and instruction selection
-✅ Maintainability: Clean, well-commented assembly code with logical structure
-✅ Testing: Comprehensive test coverage with automated verification
+### Code Quality Standards
 
-Learning Objectives Met
+- ✅ **Norm Compliance**: Adherence to 42 School coding standards and best practices
+- ✅ **Memory Safety**: No buffer overflows, memory leaks, or undefined behavior
+- ✅ **Edge Case Handling**: Robust handling of null pointers, empty strings, and error conditions
+- ✅ **Performance**: Optimized assembly code with efficient register usage and instruction selection
+- ✅ **Maintainability**: Clean, well-commented assembly code with logical structure
+- ✅ **Testing**: Comprehensive test coverage with automated verification
 
-✅ Low-Level Understanding: Deep comprehension of computer architecture and instruction execution
-✅ System Programming: Direct system call usage and kernel interface understanding
-✅ Assembly Mastery: Proficiency in x86-64 assembly language and Intel syntax
-✅ Debugging Skills: Ability to debug assembly code and analyze program behavior
-✅ Performance Optimization: Skills in writing efficient, optimized low-level code
+### Learning Objectives Met
+
+- ✅ **Low-Level Understanding**: Deep comprehension of computer architecture and instruction execution
+- ✅ **System Programming**: Direct system call usage and kernel interface understanding
+- ✅ **Assembly Mastery**: Proficiency in x86-64 assembly language and Intel syntax
+- ✅ **Debugging Skills**: Ability to debug assembly code and analyze program behavior
+- ✅ **Performance Optimization**: Skills in writing efficient, optimized low-level code
 
 
 ## Contact
 
 - **GitHub**: [@TuroTheReal](https://github.com/TuroTheReal)
 - **Email**: arthurbernard.dev@gmail.com
-- **LinkedIn**: [Arthur Bernard](https://linkedin.com/in/arthur-bernard)
+- **LinkedIn**: [Arthur Bernard](https://www.linkedin.com/in/arthurbernard92/)
 - **Portfolio**: https://arthur-portfolio.com
 
 ---
-
 
 ![Assembly Badge](https://img.shields.io/badge/Assembly-x86--64-blue)
 ![NASM Badge](https://img.shields.io/badge/NASM-2.15+-green)
