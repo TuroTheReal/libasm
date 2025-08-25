@@ -13,9 +13,9 @@ ft_list_sort:
 
 						; Vérifications
 	test rdi, rdi
-	jz .end				; lst == NULL
+	jz .end		 	; lst == NULL
 	test rsi, rsi
-	jz .end				; cmp == NULL
+	jz .end			 	; cmp == NULL
 
 	mov r12, rdi		; r12 = lst (&ptr)
 	mov r13, rsi		; r13 = fonction de comparaison
