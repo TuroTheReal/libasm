@@ -76,55 +76,55 @@ make
 
 ### Low-Level Programming Fundamentals
 
-**Register Management**: Mastered the art of efficiently utilizing x86-64 registers (RAX, RBX, RCX, RDX, RSI, RDI, RSP, RBP) for data manipulation, parameter passing, and return value handling.
+- **Register Management**: Mastered the art of efficiently utilizing x86-64 registers (RAX, RBX, RCX, RDX, RSI, RDI, RSP, RBP) for data manipulation, parameter passing, and return value handling.
 Understanding register conventions is crucial for writing performant assembly code that integrates seamlessly with C calling conventions.
 
-**Memory Addressing**: Developed deep understanding of different addressing modes including immediate, register, memory, and indexed addressing.
+- **Memory Addressing**: Developed deep understanding of different addressing modes including immediate, register, memory, and indexed addressing.
 This knowledge enables precise control over how data flows between CPU registers and system memory, forming the foundation of efficient low-level programming.
 
-**Stack Operations**: Gained comprehensive knowledge of stack frame management, including proper setup and teardown of function call frames, parameter passing mechanisms, and local variable allocation.
+- **Stack Operations**: Gained comprehensive knowledge of stack frame management, including proper setup and teardown of function call frames, parameter passing mechanisms, and local variable allocation.
 Understanding the stack is essential for debugging, optimization, and system-level programming.
 
 ### System Programming
 
-**System Call Interface**: Learned direct interaction with the Linux kernel through system calls, bypassing the C library layer to understand how fundamental operations like read and write actually communicate with the operating system.
+- **System Call Interface**: Learned direct interaction with the Linux kernel through system calls, bypassing the C library layer to understand how fundamental operations like read and write actually communicate with the operating system.
 This knowledge is invaluable for system programming and understanding performance characteristics.
 
-**Error Handling**: Implemented proper errno handling for system calls, understanding how error conditions propagate from kernel space to user space and how to maintain consistency with standard library behavior.
+- **Error Handling**: Implemented proper errno handling for system calls, understanding how error conditions propagate from kernel space to user space and how to maintain consistency with standard library behavior.
 This ensures robust, production-ready code.
 
-**ABI Compliance**: Mastered the System V AMD64 ABI (Application Binary Interface), ensuring that assembly functions can seamlessly interoperate with C code through proper calling conventions, register usage, and stack alignment requirements.
+- **ABI Compliance**: Mastered the System V AMD64 ABI (Application Binary Interface), ensuring that assembly functions can seamlessly interoperate with C code through proper calling conventions, register usage, and stack alignment requirements.
 
 ### Assembly Language Mastery
 
-**Intel Syntax**: Became proficient in Intel assembly syntax, including instruction formatting, operand ordering, and mnemonic usage.
+- **Intel Syntax**: Became proficient in Intel assembly syntax, including instruction formatting, operand ordering, and mnemonic usage.
 Intel syntax is widely used in industry and provides clear, readable assembly code that scales well to complex programs.
 
-**Instruction Set Understanding**: Developed expertise with x86-64 instruction sets including data movement (MOV, PUSH, POP), arithmetic operations (ADD, SUB, MUL, DIV),
+- **Instruction Set Understanding**: Developed expertise with x86-64 instruction sets including data movement (MOV, PUSH, POP), arithmetic operations (ADD, SUB, MUL, DIV),
 logical operations (AND, OR, XOR), and control flow instructions (JMP, JE, JNE, CALL, RET).
 
-**Optimization Techniques**: Learned assembly-level optimization strategies including efficient loop structures, conditional jumps,
+- **Optimization Techniques**: Learned assembly-level optimization strategies including efficient loop structures, conditional jumps,
 and register allocation patterns that minimize instruction count and maximize CPU pipeline efficiency.
 
 
 ## Skills Developed
 
-**Computer Architecture Understanding**: Gained profound insight into how modern CPUs execute instructions, manage memory hierarchies, and handle concurrent operations.
+- **Computer Architecture Understanding**: Gained profound insight into how modern CPUs execute instructions, manage memory hierarchies, and handle concurrent operations.
 This knowledge forms the foundation for writing efficient code in any programming language and understanding performance bottlenecks in complex systems.
 
-**Debugging and Analysis Skills**: Developed expertise in using low-level debugging tools including GDB for assembly debugging, objdump for disassembly analysis, and strace for system call tracing.
+- **Debugging and Analysis Skills**: Developed expertise in using low-level debugging tools including GDB for assembly debugging, objdump for disassembly analysis, and strace for system call tracing.
 These skills are invaluable for diagnosing complex software issues and understanding program behavior at the deepest level.
 
-**Performance Optimization**: Learned to write highly efficient code by understanding CPU instruction costs, memory access patterns, and branch prediction mechanisms.
+- **Performance Optimization**: Learned to write highly efficient code by understanding CPU instruction costs, memory access patterns, and branch prediction mechanisms.
 This knowledge enables writing performance-critical code and optimizing existing applications for maximum throughput.
 
-**Systems Programming Foundation**: Built a solid foundation for systems programming, embedded development, and kernel programming by understanding how software interfaces with hardware.
+- **Systems Programming Foundation**: Built a solid foundation for systems programming, embedded development, and kernel programming by understanding how software interfaces with hardware.
 This knowledge is essential for careers in systems programming, cybersecurity, and high-performance computing.
 
-**Attention to Detail**: Developed meticulous attention to detail required for assembly programming, where single instruction mistakes can cause subtle bugs or system crashes.
+- **Attention to Detail**: Developed meticulous attention to detail required for assembly programming, where single instruction mistakes can cause subtle bugs or system crashes.
 This precision translates to higher code quality in all programming endeavors.
 
-**Problem-Solving Methodology**: Enhanced analytical thinking skills by learning to break down complex problems into fundamental operations that can be expressed in assembly instructions.
+- **Problem-Solving Methodology**: Enhanced analytical thinking skills by learning to break down complex problems into fundamental operations that can be expressed in assembly instructions.
 This systematic approach improves programming ability across all languages and domains.
 
 ## Project Overview
@@ -139,13 +139,13 @@ The project aims to demonstrate that complex functionality can be built from fun
 
 ### Core Implementation Philosophy
 
-**Efficiency First**: Every instruction is chosen deliberately to minimize CPU cycles and memory accesses while maintaining readability and maintainability.
+- **Efficiency First**: Every instruction is chosen deliberately to minimize CPU cycles and memory accesses while maintaining readability and maintainability.
 The assembly implementations often outperform their C counterparts due to precise register usage and optimized instruction sequences.
 
-**Standards Compliance**: All functions maintain perfect compatibility with their libc counterparts, including edge case handling, error conditions, and return value semantics.
+- **Standards Compliance**: All functions maintain perfect compatibility with their libc counterparts, including edge case handling, error conditions, and return value semantics.
 This ensures seamless integration with existing C codebases.
 
-**Educational Value**: The code serves as a learning resource, demonstrating best practices in assembly programming, system call usage,
+- **Educational Value**: The code serves as a learning resource, demonstrating best practices in assembly programming, system call usage,
 and low-level debugging techniques that are applicable across many domains of software development.
 
 
@@ -153,30 +153,30 @@ and low-level debugging techniques that are applicable across many domains of so
 
 ### Development Environment
 
-**Assembly Language**: x86-64 Intel syntax for maximum readability and industry compatibility
-**Assembler**: NASM (Netwide Assembler) for reliable cross-platform assembly compilation
-**Toolchain**: GNU toolchain (GCC, LD, objdump) for comprehensive development workflow
-**Testing Framework**: Custom C-based testing harness with comprehensive edge case coverage
+- **Assembly Language**: x86-64 Intel syntax for maximum readability and industry compatibility
+- **Assembler**: NASM (Netwide Assembler) for reliable cross-platform assembly compilation
+- **Toolchain**: GNU toolchain (GCC, LD, objdump) for comprehensive development workflow
+- **Testing Framework**: Custom C-based testing harness with comprehensive edge case coverage
 
 ### Target Architecture
 
-**CPU Architecture**: x86-64 (AMD64) with full 64-bit register set utilization
-**Operating System**: Linux with System V AMD64 ABI compliance
-**Calling Convention**: System V AMD64 for seamless C interoperability
-**Memory Model**: 64-bit flat memory model with proper alignment handling
+- **CPU Architecture**: x86-64 (AMD64) with full 64-bit register set utilization
+- **Operating System**: Linux with System V AMD64 ABI compliance
+- **Calling Convention**: System V AMD64 for seamless C interoperability
+- **Memory Model**: 64-bit flat memory model with proper alignment handling
 
 ### Function Categories
 
-**String Functions**: Length calculation, copying, and comparison with optimized loop structures
-**I/O Functions**: Direct system call wrappers with proper error handling and errno management
-**Memory Functions**: Dynamic allocation with proper heap management and error checking
+- **String Functions**: Length calculation, copying, and comparison with optimized loop structures
+- **I/O Functions**: Direct system call wrappers with proper error handling and errno management
+- **Memory Functions**: Dynamic allocation with proper heap management and error checking
 
 ### Quality Assurance
 
-**Testing Strategy**: Comprehensive test suite covering normal operation, edge cases, and error conditions
-**Compatibility Verification**: Side-by-side comparison with standard library implementations
-**Performance Benchmarking**: Instruction count analysis and execution time measurements
-**Memory Safety**: Careful bounds checking and proper memory access patterns
+- **Testing Strategy**: Comprehensive test suite covering normal operation, edge cases, and error conditions
+- **Compatibility Verification**: Side-by-side comparison with standard library implementations
+- **Performance Benchmarking**: Instruction count analysis and execution time measurements
+- **Memory Safety**: Careful bounds checking and proper memory access patterns
 
 
 ## 42 School Standards
