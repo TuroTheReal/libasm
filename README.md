@@ -220,4 +220,3 @@ and low-level debugging techniques that are applicable across many domains of so
 ![Assembly Badge](https://img.shields.io/badge/Assembly-x86--64-blue)
 ![NASM Badge](https://img.shields.io/badge/NASM-2.15+-green)
 ![Linux Badge](https://img.shields.io/badge/Linux-x86--64-yellow)
-![42 School Badge](https://img.shields.io/badge/42-School-black)
