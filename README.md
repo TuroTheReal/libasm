@@ -203,7 +203,6 @@ Learning Objectives Met
 ✅ Low-Level Understanding: Deep comprehension of computer architecture and instruction execution
 ✅ System Programming: Direct system call usage and kernel interface understanding
 ✅ Assembly Mastery: Proficiency in x86-64 assembly language and Intel syntax
-✅ ABI Knowledge: Understanding of calling conventions and binary interface requirements
 ✅ Debugging Skills: Ability to debug assembly code and analyze program behavior
 ✅ Performance Optimization: Skills in writing efficient, optimized low-level code
 
