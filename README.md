@@ -208,6 +208,13 @@ and low-level debugging techniques that are applicable across many domains of so
 - ✅ **Performance Optimization**: Skills in writing efficient, optimized low-level code
 
 
+## 📝 Related Articles
+
+Blog posts documenting the learning process and context behind this project:
+
+- 📝 [42 Piscine and Common Core: What I Learned](https://arthur-portfolio.com/en/blog/42-piscine-and-core-curriculum) — Reflections on 42 School's selection process and 2-year curriculum
+
+---
 ## Contact
 
 - **GitHub**: [@TuroTheReal](https://github.com/TuroTheReal)
