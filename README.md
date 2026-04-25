@@ -3,6 +3,7 @@
 ## Table of Contents
 
 - [About](#about)
+- [Project Structure](#project-structure)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Key Concepts Learned](#key-concepts-learned)
@@ -10,6 +11,7 @@
 - [Project Overview](#project-overview)
 - [Architecture & Stack](#architecture--stack)
 - [42 School Standards](#42-school-standards)
+- [Related Articles](#-related-articles)
 - [Contact](#contact)
 
 
@@ -21,6 +23,32 @@ The project involves recreating essential C library functions in **x86-64 Intel 
 Through this hands-on approach, students gain fundamental understanding of computer architecture, system calls, memory management, and low-level programming paradigms.
 This implementation demonstrates mastery of assembly language syntax, register manipulation, stack operations, system call interfaces, and error handling at the lowest level of software abstraction.
 The project serves as a crucial stepping stone toward understanding how computers actually execute our code.
+
+
+## Project Structure
+
+```
+libasm/
+├── Makefile
+├── libasm.h
+├── rulesASM.txt
+│
+├── ft_strlen.s             # Mandatory
+├── ft_strcpy.s             # Mandatory
+├── ft_strcmp.s             # Mandatory
+├── ft_strdup.s             # Mandatory
+├── ft_read.s               # Mandatory
+├── ft_write.s              # Mandatory
+├── main.c                  # Mandatory test program
+│
+├── ft_atoi_base_bonus.s    # Bonus
+├── ft_list_push_front_bonus.s
+├── ft_list_remove_if_bonus.s
+├── ft_list_size_bonus.s
+├── ft_list_sort_bonus.s
+└── main_bonus.c            # Bonus test program
+```
+
 
 ## Installation
 
@@ -39,16 +67,13 @@ The project serves as a crucial stepping stone toward understanding how computer
 git clone https://github.com/TuroTheReal/libasm.git
 cd libasm
 
-# Build && compile the library
+# Build the static library (libasm.a) with the mandatory main
 make
 
-# Build && compile the library with bonus
+# Build the bonus main (links libasm.a with bonus functions)
 make bonus
 
-# Run comprehensive tests
-make test
-
-# Clean build artifacts
+# Clean object files
 make clean
 
 # Full cleanup including library
@@ -64,11 +89,15 @@ make re
 ### Quick Start Guide
 
 ```bash
-# 1. Build the static library
+# 1. Build the static library and the test binary
 make
 
-# 2. Test individual functions
-./test_program
+# 2. Run the mandatory test program
+./libasm
+
+# 3. Build and run the bonus test program
+make bonus
+./libasm_bonus
 ```
 
 
@@ -132,6 +161,23 @@ This systematic approach improves programming ability across all languages and d
 The libasm project represents a deep dive into the fundamental layer of computer programming, where high-level abstractions give way to direct hardware manipulation.
 By implementing core C library functions in assembly language, this project bridges the gap between theoretical computer science concepts and practical low-level programming skills.
 
+### Mandatory Functions
+
+- `ft_strlen` — compute string length
+- `ft_strcpy` — copy a string into a destination buffer
+- `ft_strcmp` — compare two strings
+- `ft_strdup` — duplicate a string (uses `malloc` from libc)
+- `ft_write` — wrapper around the `write` syscall with errno handling
+- `ft_read` — wrapper around the `read` syscall with errno handling
+
+### Bonus Functions
+
+- `ft_atoi_base` — convert a string to an integer in an arbitrary base
+- `ft_list_push_front` — push a node at the head of a linked list
+- `ft_list_size` — compute the size of a linked list
+- `ft_list_sort` — sort a linked list using a comparator function pointer
+- `ft_list_remove_if` — remove all nodes matching a given predicate
+
 ### Vision and Goals
 
 Create a fully compatible assembly implementation of essential C library functions while gaining deep understanding of computer architecture, system programming, and low-level optimization techniques.
@@ -156,7 +202,7 @@ and low-level debugging techniques that are applicable across many domains of so
 - **Assembly Language**: x86-64 Intel syntax for maximum readability and industry compatibility
 - **Assembler**: NASM (Netwide Assembler) for reliable cross-platform assembly compilation
 - **Toolchain**: GNU toolchain (GCC, LD, objdump) for comprehensive development workflow
-- **Testing Framework**: Custom C-based testing harness with comprehensive edge case coverage
+- **Testing**: Custom C-based test programs (`main.c`, `main_bonus.c`) linking against `libasm.a`
 
 ### Target Architecture
 
@@ -167,13 +213,14 @@ and low-level debugging techniques that are applicable across many domains of so
 
 ### Function Categories
 
-- **String Functions**: Length calculation, copying, and comparison with optimized loop structures
-- **I/O Functions**: Direct system call wrappers with proper error handling and errno management
-- **Memory Functions**: Dynamic allocation with proper heap management and error checking
+- **String Functions**: Length calculation, copying, duplication, and comparison with optimized loop structures
+- **I/O Functions**: Direct system call wrappers (`ft_read`, `ft_write`) with proper errno management
+- **Bonus — Base Conversion**: `ft_atoi_base` for arbitrary-base parsing
+- **Bonus — Linked Lists**: Push, size, sort, and conditional removal on singly-linked lists
 
 ### Quality Assurance
 
-- **Testing Strategy**: Comprehensive test suite covering normal operation, edge cases, and error conditions
+- **Testing Strategy**: C test programs covering normal operation, edge cases, and error conditions
 - **Compatibility Verification**: Side-by-side comparison with standard library implementations
 - **Performance Benchmarking**: Instruction count analysis and execution time measurements
 - **Memory Safety**: Careful bounds checking and proper memory access patterns
@@ -183,12 +230,12 @@ and low-level debugging techniques that are applicable across many domains of so
 
 ### Project Standards
 
-- ✅ **Assembly Implementation**: All functions written in x86-64 Intel syntax assembly
+- ✅ **Assembly Implementation**: All functions written in x86-64 Intel syntax assembly (NASM)
 - ✅ **C Library Compatibility**: Perfect behavioral compatibility with standard libc functions
 - ✅ **Error Handling**: Proper errno setting and error condition management
-- ✅ **System Calls**: Direct kernel interface usage without libc dependencies
-- ✅ **Build System**: Comprehensive Makefile with standard targets
-- ✅ **Documentation**: Clear code comments and comprehensive testing
+- ✅ **System Calls**: Direct kernel interface usage for `ft_read` / `ft_write`
+- ✅ **Build System**: Makefile with `all`, `bonus`, `clean`, `fclean`, `re`
+- ✅ **Documentation**: Clear code comments and reference `rulesASM.txt`
 
 ### Code Quality Standards
 
@@ -197,7 +244,7 @@ and low-level debugging techniques that are applicable across many domains of so
 - ✅ **Edge Case Handling**: Robust handling of null pointers, empty strings, and error conditions
 - ✅ **Performance**: Optimized assembly code with efficient register usage and instruction selection
 - ✅ **Maintainability**: Clean, well-commented assembly code with logical structure
-- ✅ **Testing**: Comprehensive test coverage with automated verification
+- ✅ **Testing**: Dedicated test programs for both mandatory and bonus parts
 
 ### Learning Objectives Met
 
@@ -215,6 +262,7 @@ Blog posts documenting the learning process and context behind this project:
 - 📝 [42 Piscine and Common Core: What I Learned](https://arthur-portfolio.com/en/blog/42-piscine-and-core-curriculum) — Reflections on 42 School's selection process and 2-year curriculum
 
 ---
+
 ## Contact
 
 - **GitHub**: [@TuroTheReal](https://github.com/TuroTheReal)
