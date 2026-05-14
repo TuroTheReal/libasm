@@ -259,7 +259,7 @@ and low-level debugging techniques that are applicable across many domains of so
 
 Blog posts documenting the learning process and context behind this project:
 
-- 📝 [42 Piscine and Common Core: What I Learned](https://arthur-portfolio.com/en/blog/42-piscine-and-core-curriculum) — Reflections on 42 School's selection process and 2-year curriculum
+- 📝 [42 Piscine and Common Core: What I Learned](https://arthurbernard.dev/en/blog/42-piscine-and-core-curriculum) — Reflections on 42 School's selection process and 2-year curriculum
 
 ---
 
@@ -268,7 +268,7 @@ Blog posts documenting the learning process and context behind this project:
 - **GitHub**: [@TuroTheReal](https://github.com/TuroTheReal)
 - **Email**: arthurbernard.dev@gmail.com
 - **LinkedIn**: [Arthur Bernard](https://www.linkedin.com/in/arthurbernard92/)
-- **Portfolio**: https://arthur-portfolio.com
+- **Portfolio**: https://arthurbernard.dev
 
 ---
 
